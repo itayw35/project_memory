@@ -23,5 +23,8 @@ elem.className = "card"
 elem.onmouseover = function(){
 elem.className = "card-over"
 }
+elem.onmouseleave = function(){
+    elem.className = "card"
+}
 board.appendChild(elem);
 }
