@@ -13,18 +13,32 @@ function shuffle(arr){
 return shuffledArr;
 }
 let cards = ["A", "B", "C", "D", "E"],
- arr = shuffle(cards);
-
-let board = document.getElementById("game-table");
-for(n of arr){
-let elem = document.createElement("div");
-elem.innerText = n;
-elem.className = "card"
-elem.onmouseover = function(){
-elem.className = "card-over"
-}
-elem.onmouseleave = function(){
+ arr = shuffle(cards), counter = 0, counterAr = [];
+ board = document.getElementById("game-table");
+for(i in arr){
+    let elem = document.createElement("div");
     elem.className = "card"
+    elem.id = i;
+    elem.onmouseover = function(){
+        elem.className = "card-over"
 }
-board.appendChild(elem);
+    elem.onmouseleave = function(){
+        elem.className = "card"
 }
+    counterAr[i] = 0;
+    elem.onclick = function(){
+        counterAr[this.id]++;
+        let dc = counterAr.find((value)=>value > 1);
+        if(counter < 2 || (dc && counter < dc + 1)){
+            counter++;
+            elem.innerText = arr[this.id];
+}
+}
+    board.appendChild(elem);
+}
+
+
+
+
+   
+
