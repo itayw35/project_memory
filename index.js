@@ -26,47 +26,48 @@ for(i in arr){
     elem.onmouseleave = function(){
         elem.className = "card"
 }
-debugger
-    counterAr[i] = 0;
-    elem.onclick = function(){
-        counterAr[this.id]++;
-        let dc = counterAr.find((value)=>value > 1);
-        if(counter < 2 || (dc && counter < dc + 1)){
-            counter++;
-            if(!(openedCards.find((value)=> value == elem))){
-                openedCards.push(elem);
-                }
-                elem.innerText = arr[this.id];
-    }
-            else{
-                if(openedCards[0].innerText == openedCards[1].innerText){
-                    openedCards[0].className = "equal";
-                    openedCards[1].className = "equal";
-                    alert("well done!");
-                    counter = 0;
-                    pairsCounter++;
-                    openedCards = [];
-                    for(i in counterAr){
-                        counterAr[i] = 0;
-                        if(pairsCounter == cards.length - 1){
-                            alert("congrats! you won the game!")
-                        }
-                    }
-                    }
-                else{  
-                    openedCards[0].innerText = "";
-                    openedCards[1].innerText = "";
-                    counter = 0;
-                    openedCards = [];
-                    for(i in counterAr){
-                        counterAr[i] = 0;
-                }
-            }
-            }
-          
-        }
     board.appendChild(elem);
 }
+for(i in arr){
+    counterAr[i] = 0;
+    document.getElementById(i).onclick = function(){
+    counterAr[this.id]++;
+    let dc = counterAr.find((value)=>value > 1);
+    if(counter < 2 || (dc && counter < dc + 1)){
+        counter++;
+        if(!(openedCards.find((value)=> value == this))){
+        openedCards.push(this);
+        }
+        this.innerText = arr[this.id];
+            if( openedCards.length > 1 && openedCards[0].innerText == openedCards[1].innerText){
+                openedCards[0].className = "equal";
+                openedCards[1].addEventListener("mouseleave", ()=> {
+                    this.className = "equal"
+                })
+                alert("well done!")
+                counter = 0;
+                pairsCounter++;
+                if(pairsCounter == cards.length){ 
+                    alert("congrats! you won the game!");
+                }
+                openedCards = [];
+                for(i in counterAr){
+                    counterAr[i] = 0;
+            }
+    }
+}
+        else{  
+            openedCards[0].innerText = "";
+            openedCards[1].innerText = "";
+            counter = 0;
+            openedCards = [];
+            for(i in counterAr){
+                counterAr[i] = 0;
+            }
+        }
+    } 
+}
+
 
 
 
