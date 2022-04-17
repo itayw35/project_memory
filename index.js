@@ -13,7 +13,8 @@ function shuffle(arr){
 return shuffledArr;
 }
 let cards = ["A", "B", "C", "D", "E"],
- arr = shuffle(cards), counter = 0, counterAr = [];
+ arr = shuffle(cards), counter = 0, counterAr = [],
+ pairsCounter = 0, openedCards = [];
  board = document.getElementById("game-table");
 for(i in arr){
     let elem = document.createElement("div");
@@ -25,6 +26,7 @@ for(i in arr){
     elem.onmouseleave = function(){
         elem.className = "card"
 }
+debugger
     counterAr[i] = 0;
     elem.onclick = function(){
         counterAr[this.id]++;
