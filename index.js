@@ -12,7 +12,7 @@ function shuffle(arr){
 }
 return shuffledArr;
 }
-let cards = ["A", "B", "C", "D", "E"],
+let cards = ["😜", "🥰", "🍕", "🐨", "💐"];
  arr = shuffle(cards), counter = 0, counterAr = [],
  pairsCounter = 0, openedCards = [];
  board = document.getElementById("game-table");
