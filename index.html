@@ -7,7 +7,7 @@
     <title>Document</title>
     <style>
         .card{
-            color: blue;
+            color: rgb(0, 0, 255);
             background-color: yellow;
             margin: 10px;
             border: 2px purple solid;
@@ -15,25 +15,15 @@
             height: 300px;
             width: 200px;
             border-radius: 3px; 
-            font-size: medium;
+            font-size: 500%;
             padding: 10px;
             text-align: center;
             line-height: 300px;
         }
-        .card-over{
+        .card:hover{
             cursor:pointer;
-            color: blue;
-            margin: 10px;
-            border: 1px black solid;
-            display: inline;
-            height: 300px;
-            width: 200px;
-            border-radius: 3px; 
             background-color: aquamarine;
-            font-size:x-large;
-            padding: 10px;
-            text-align: center;
-            line-height: 300px;
+            font-size: 800%;
         }
         .equal{
             color: blue;
@@ -50,21 +40,35 @@
             line-height: 300px;
             visibility: hidden;
         }
-        #game-table{
-            background-color: green;
+        #Player1{
+            background-color: rgb(118, 77, 216);
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             padding-top: 10px;
-            font-style: italic;
-            font-size:x-large;
+        }
+        #Player2{
+            background-color: rgb(34, 121, 8);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding-top: 10px;
+        }
+        header{
             color:rgb(201, 218, 233); 
+            background-color: black;
+            text-align: center;
+            font-style: italic;
+            padding: 5px;
         }
         
     </style>
 </head>
 <body>
-    <div id="game-table"> Memory Game </div>
+    <header><div id = "headline"> Memory Game: Player 1</div>
+        <div id = "score">Score: 0</div>
+    </header>
+    <div id="Player1"> </div>
     <script src="index.js"></script>  
 </body>
 </html>
