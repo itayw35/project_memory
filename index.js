@@ -15,20 +15,17 @@ function openCards(arr,elem){
     if(!(arr.find((value)=> value == elem))){
         arr.push(elem);
         }
-        elem.innerText = shuffledCards[elem.id];
+        elem.classList.add("flip");
+        document.getElementById("i" + elem.id).classList.add("open-image");
         return arr;
 }
 let timeout;
 function isEqual(arr){
-        if(arr[0].innerText == arr[1].innerText){
+        if(shuffledCards[arr[0].id] == shuffledCards[arr[1].id]){
                 timeout = setTimeout(equalCards,2000,arr);
                 alert("well done!");
                 pairsCounter++;
-                if(pairsCounter == cards.length){
-                    alert((players[0].score > players[1].score)? `${players[0].playerName} wins`:
-                    `${players[1].playerName} wins`);
-                }
-            return true;
+                return true;
     }
         else{  
            timeout = setTimeout(closeCards,2000,arr);
@@ -37,8 +34,8 @@ function isEqual(arr){
         }
     }
 function closeCards(arr){
-    arr[0].innerText = "";
-    arr[1].innerText = "";
+    arr[0].classList.remove("flip");
+    arr[1].classList.remove("flip");
     return arr;
 }
 function equalCards(arr){
@@ -51,9 +48,15 @@ function changePlayer(obj){
     document.getElementById("headline").innerText = `Memory Game: ${obj.playerName}`;
     document.getElementById("score").innerText = `Score: ${obj.score}`;    
 }
+function isWinning(){
+    if(pairsCounter == cards.length){
+        alert((players[0].score > players[1].score)? `${players[0].playerName} wins`:
+        `${players[1].playerName} wins`);
+    }
+}
     
     
-let cards = ["😜", "🥰", "🍕", "🐨", "💐"],
+let cards = ["imageedit_1_2405853986.png", "98c17b.png", "imageedit_3_9523258067.png", "imageedit_2_5273722075.png", "imageedit_2_3338791113.png"],
  shuffledCards = shuffle(cards), counter = 0, pairsCounter = 0, counterAr = [], 
  openedCards = [], turn = 0,
  players = [
@@ -61,12 +64,33 @@ let cards = ["😜", "🥰", "🍕", "🐨", "💐"],
      {playerName: "Player2", score: 0},
  ];
  const board = document.getElementById("Player1");
-for(i in shuffledCards){
-    let elem = document.createElement("div");
-    elem.className = "card";
-    elem.id = i;
-    board.appendChild(elem);
+ function createCards(){
+    for(i in shuffledCards){
+        let elem = document.createElement("div");
+        elem.className = "card";
+        elem.id = i;
+        board.appendChild(elem);
+        let elem2 = document.createElement("div");
+        elem2.className = "card-inner";
+        elem.appendChild(elem2);
+        let elem3 = document.createElement("div");
+        elem3.className = "card-front";
+        elem2.appendChild(elem3);
+        let elem4 = document.createElement("h3");
+        elem4.innerText = "Memory Game";
+        elem3.appendChild(elem4);
+        let elem5 = document.createElement("div");
+        elem5.className = "card-back";
+        elem2.appendChild(elem5);
+        let elem6 = document.createElement("img");
+        elem6.src = shuffledCards[i];
+        elem6.alt = Image;
+        elem6.className = "image";
+        elem6.id = "i" + elem.id;
+        elem5.appendChild(elem6);
+ }
 }
+createCards();
 for(i in shuffledCards){
     counterAr[i] = 0;
     document.getElementById(i).onclick = function(){
@@ -109,7 +133,10 @@ for(i in shuffledCards){
                 }  
             }
         }
+        isWinning();
     }
 }      
 }
+
+
 
