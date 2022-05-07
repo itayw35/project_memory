@@ -4,7 +4,7 @@
   border: 1px rgb(230, 20, 20) solid;
   height: 300px;
   width: 200px;
-  border-radius: 3px;
+  border-radius: 7px;
   font-size: 500%;
   padding: 10px;
   text-align: center;
@@ -47,8 +47,8 @@
   transform: rotateY(180deg);
 }
 .image {
-  height: 80%;
-  width: 80%;
+  height: 75%;
+  width: 75%;
 }
 .open-image {
   visibility: visible;
@@ -64,8 +64,8 @@
   padding-top: 10px;
 }
 header {
-  color: black solid;
-  background-color: rgb(201, 218, 233);
+  background-color: black;
+  color: whitesmoke;
   text-align: center;
   font-style: italic;
   padding: 5px;
@@ -74,11 +74,29 @@ header {
   justify-content: flex-end;
 }
 #ss {
-  margin-left: 550px;
+  background-color: white;
+  margin-left: 300px;
   margin-right: 20px;
   margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 20px;
+}
+#score-sheet {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
+  height: 50px;
   align-items: center;
   gap: 3px;
+  width: 400px;
+}
+#score-sheet > div {
+  flex: 1 1 1px;
+}
+#msg {
+  font-size: 1500%;
+  color: rgb(195, 0, 255);
+  position: absolute;
+  top: 150px;
+  left: 500px;
 }

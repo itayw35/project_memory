@@ -12,8 +12,7 @@ function shuffle(arr) {
       (i2 = Math.round(Math.random() * (newArr.length - 1)));
     card1 = shuffledArr[i];
     card2 = shuffledArr[i2];
-    shuffledArr.splice(i, 1, card2);
-    shuffledArr.splice(i2, 1, card1);
+    shuffledArr[i2] = shuffledArr.splice(i, 1, card2).toString();
   }
   return shuffledArr;
 }
@@ -29,7 +28,11 @@ let timeout;
 function isEqual(arr) {
   if (shuffledCards[arr[0].id] == shuffledCards[arr[1].id]) {
     timeout = setTimeout(equalCards, 2000, arr);
-    alert("well done!");
+    let msg = document.createElement("div");
+    msg.innerText = "Well Done!";
+    msg.id = "msg";
+    board.appendChild(msg);
+    timeout = setTimeout(closeMsg, 1500);
     pairsCounter++;
     return true;
   } else {
@@ -37,6 +40,9 @@ function isEqual(arr) {
     turn++;
     return false;
   }
+}
+function closeMsg() {
+  board.removeChild(msg);
 }
 function closeCards(arr) {
   arr[0].classList.remove("flip");
