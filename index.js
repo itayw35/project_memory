@@ -1,10 +1,10 @@
 function shuffle(arr) {
-  let newArr = arr,
+  let newArr = arr.slice(0, cardsNum / 2),
     shuffledArr = [],
     card2 = "",
     i = 0,
     i2 = 0;
-  newArr = newArr.concat(arr);
+  newArr = newArr.concat(newArr);
   shuffledArr = newArr;
   for (n of newArr) {
     (i = Math.round(Math.random() * (newArr.length - 1))),
@@ -67,8 +67,9 @@ function changePlayer(obj) {
     scoreSheet.id = "score-sheet";
     header.appendChild(scoreSheet);
     let tempPlayers = players.filter((value) => value != players[turn]);
-    tempPlayers.forEach((value) => {
+    tempPlayers.forEach((value, index) => {
       elem = document.createElement("div");
+      elem.id = "ss" + index;
       elem.innerText = `${value.playerName}: \t${value.score}`;
       elem.style.color = `rgb(${value.r},${value.g},${value.b})`;
       scoreSheet.appendChild(elem);
@@ -97,10 +98,25 @@ function setPlayer(name) {
 }
 let playersNum = Number(prompt("How many players in the game?")),
   players = [];
+playersNum = playersCheck(playersNum);
 for (i = 0; i < playersNum; i++) {
   let playerN = prompt("Enter player name");
   players.push(setPlayer(playerN));
 }
+let cardsNum = Number(prompt("How many cards in the game? [2-20]"));
+function cardsCheck(cardsN) {
+  while (cardsN > 20 || cardsN % 2 == 1 || !Number(cardsN)) {
+    cardsN = Number(prompt("please choose an even number up to 20"));
+  }
+  return cardsN;
+}
+function playersCheck(playersN) {
+  while (!Number(playersN)) {
+    playersN = Number(prompt("please enter a number"));
+  }
+  return playersN;
+}
+cardsNum = cardsCheck(cardsNum);
 
 let cards = [
     "imageedit_1_2405853986.png",
@@ -108,6 +124,11 @@ let cards = [
     "imageedit_3_9523258067.png",
     "imageedit_2_5273722075.png",
     "imageedit_2_3338791113.png",
+    "הורדה-removebg-preview.png",
+    "images-removebg-preview.png",
+    "panda-34-removebg-preview.png",
+    "rainbow-removebg-preview.png",
+    "shutterstock_587596124_web-removebg-preview.png",
   ],
   shuffledCards = shuffle(cards),
   counter = 0,
