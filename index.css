@@ -71,16 +71,9 @@ header {
   padding: 5px;
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: center;
 }
-#ss {
-  background-color: white;
-  margin-left: 300px;
-  margin-right: 20px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border-radius: 20px;
-}
+
 #score-sheet {
   display: flex;
   flex-direction: column;
@@ -89,6 +82,13 @@ header {
   align-items: center;
   gap: 3px;
   width: 400px;
+  overflow: auto;
+  background-color: white;
+  margin-left: 300px;
+  margin-right: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 20px;
 }
 #score-sheet > div {
   flex: 1 1 1px;
@@ -99,4 +99,6 @@ header {
   position: absolute;
   top: 150px;
   left: 500px;
+  border: 5px black;
+  font-family: fantasy;
 }

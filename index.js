@@ -1,7 +1,6 @@
 function shuffle(arr) {
   let newArr = arr,
     shuffledArr = [],
-    card1 = "",
     card2 = "",
     i = 0,
     i2 = 0;
@@ -10,7 +9,6 @@ function shuffle(arr) {
   for (n of newArr) {
     (i = Math.round(Math.random() * (newArr.length - 1))),
       (i2 = Math.round(Math.random() * (newArr.length - 1)));
-    card1 = shuffledArr[i];
     card2 = shuffledArr[i2];
     shuffledArr[i2] = shuffledArr.splice(i, 1, card2).toString();
   }
@@ -61,18 +59,22 @@ function changePlayer(obj) {
   board.style.backgroundColor = `rgb(${obj.r},${obj.g},${obj.b})`;
   headline.innerText = `Memory Game\nPlayer: ${obj.playerName}`;
   score.innerText = `Score: ${obj.score}`;
-  ss.innerHTML = "";
-  const scoreSheet = document.createElement("span");
-  scoreSheet.id = "score-sheet";
-  ss.appendChild(scoreSheet);
-  let tempPlayers = players.filter((value) => value != players[turn]);
-  tempPlayers.forEach((value, index) => {
-    elem = document.createElement("div");
-    elem.id = "ss" + index;
-    elem.innerText = `${value.playerName}: \t${value.score}`;
-    elem.style.color = `rgb(${value.r},${value.g},${value.b})`;
-    scoreSheet.appendChild(elem);
-  });
+  const scoreSheet = document.getElementById("score-sheet");
+  const header = document.querySelector("header");
+  header.removeChild(scoreSheet);
+  if (players.length > 1) {
+    const scoreSheet = document.createElement("div");
+    scoreSheet.id = "score-sheet";
+    header.appendChild(scoreSheet);
+    let tempPlayers = players.filter((value) => value != players[turn]);
+    tempPlayers.forEach((value) => {
+      elem = document.createElement("div");
+      elem.innerText = `${value.playerName}: \t${value.score}`;
+      elem.style.color = `rgb(${value.r},${value.g},${value.b})`;
+      scoreSheet.appendChild(elem);
+      header.style.justifyContent = "flex-end";
+    });
+  }
 }
 function isWinning() {
   let winner = { name: "", score: 0 };
