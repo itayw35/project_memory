@@ -26,6 +26,8 @@ let timeout;
 function isEqual(arr) {
   if (shuffledCards[arr[0].id] == shuffledCards[arr[1].id]) {
     timeout = setTimeout(equalCards, 2000, arr);
+    const mySound = document.getElementById("sound");
+    mySound.play();
     let msg = document.createElement("div");
     msg.innerText = "Well Done!";
     msg.id = "msg";
@@ -86,6 +88,8 @@ function isWinning() {
     }
   });
   alert(`${winner.name} wins`);
+  const mySound2 = document.getElementById("sound2");
+  mySound2.play();
 }
 function setPlayer(name) {
   return {
@@ -105,14 +109,14 @@ for (i = 0; i < playersNum; i++) {
 }
 let cardsNum = Number(prompt("How many cards in the game? [2-20]"));
 function cardsCheck(cardsN) {
-  while (cardsN > 20 || cardsN % 2 == 1 || !Number(cardsN)) {
-    cardsN = Number(prompt("please choose an even number up to 20"));
+  while (cardsN > 20 || cardsN % 2 == 1 || !Number(cardsN) || cardsN <= 0) {
+    cardsN = Number(prompt("please choose an even number between 2 - 20"));
   }
   return cardsN;
 }
 function playersCheck(playersN) {
-  while (!Number(playersN)) {
-    playersN = Number(prompt("please enter a number"));
+  while (!Number(playersN) || playersN <= 0) {
+    playersN = Number(prompt("please enter a positive number"));
   }
   return playersN;
 }
@@ -191,7 +195,7 @@ for (i in shuffledCards) {
           }
         }
       }
-      if (pairsCounter == cards.length) {
+      if (pairsCounter == cardsNum / 2) {
         isWinning();
       }
     }

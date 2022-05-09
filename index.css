@@ -6,7 +6,7 @@
   width: 200px;
   border-radius: 7px;
   font-size: 500%;
-  padding: 10px;
+  padding: 5px;
   text-align: center;
   line-height: 300px;
   perspective: 1000px;
@@ -28,6 +28,10 @@
   cursor: pointer;
   background-color: aquamarine;
   font-size: 800%;
+  box-shadow: 10px 10px;
+}
+.card-front {
+  background-image: url("images.jpeg");
 }
 .card-front,
 .card-back {
