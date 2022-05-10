@@ -87,7 +87,17 @@ function isWinning() {
       winner.name = players[index].playerName;
     }
   });
-  alert(`${winner.name} wins`);
+  let winners = players.filter((value) => value.score == winner.score);
+  if (winners.length > 1) {
+    let message = "";
+    for (i = 0; i < winners.length - 1; i++) {
+      message += winners[i].playerName + " " + "&" + " ";
+    }
+    message += winners[winners.length - 1].playerName + "" + "win!";
+    alert(message);
+  } else {
+    alert(`${winner.name} wins`);
+  }
   const mySound2 = document.getElementById("sound2");
   mySound2.play();
 }
