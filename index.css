@@ -62,6 +62,7 @@
   visibility: hidden;
 }
 #Player1 {
+  min-height: 700px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
