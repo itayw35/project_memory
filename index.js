@@ -25,7 +25,7 @@ function openCards(arr, elem) {
 let timeout;
 function isEqual(arr) {
   if (shuffledCards[arr[0].id] == shuffledCards[arr[1].id]) {
-    timeout = setTimeout(equalCards, 2000, arr);
+    timeout = setTimeout(equalCards, 2500, arr);
     const mySound = document.getElementById("sound");
     mySound.play();
     let msg = document.createElement("div");
@@ -36,8 +36,7 @@ function isEqual(arr) {
     pairsCounter++;
     return true;
   } else {
-    timeout = setTimeout(closeCards, 2000, arr);
-    turn++;
+    timeout = setTimeout(closeCards, 2500, arr);
     return false;
   }
 }
@@ -47,6 +46,7 @@ function closeMsg() {
 function closeCards(arr) {
   arr[0].classList.remove("flip");
   arr[1].classList.remove("flip");
+  initiateCounters();
   return arr;
 }
 function equalCards(arr) {
@@ -54,8 +54,16 @@ function equalCards(arr) {
   document.getElementById("i" + arr[0].id).classList.remove("open-image");
   arr[1].classList.add("equal");
   document.getElementById("i" + arr[1].id).classList.remove("open-image");
+  initiateCounters();
 
   return arr;
+}
+function initiateCounters() {
+  counter = 0;
+  openedCards = [];
+  for (i2 in counterAr) {
+    counterAr[i2] = 0;
+  }
 }
 function changePlayer(obj) {
   board.style.backgroundColor = `rgb(${obj.r},${obj.g},${obj.b})`;
@@ -68,7 +76,7 @@ function changePlayer(obj) {
     const scoreSheet = document.createElement("div");
     scoreSheet.id = "score-sheet";
     header.appendChild(scoreSheet);
-    let tempPlayers = players.filter((value) => value != players[turn]);
+    let tempPlayers = players.filter((value) => value != obj);
     tempPlayers.forEach((value, index) => {
       elem = document.createElement("div");
       elem.id = "ss" + index;
@@ -148,6 +156,7 @@ let cards = [
   counter = 0,
   pairsCounter = 0,
   counterAr = [],
+  newCounterArr = [],
   openedCards = [],
   turn = 0;
 const board = document.getElementById("Player1");
@@ -183,25 +192,27 @@ for (i in shuffledCards) {
   counterAr[i] = 0;
   document.getElementById(i).onclick = function () {
     counterAr[this.id]++;
+
     let dc = counterAr.find((value) => value > 1);
-    if (counter < 2 || (dc && counter < dc + 1)) {
+    let cn = counterAr.filter((value) => value > 0);
+    let dcn = counterAr.filter((value) => value > 1);
+    if (counter < 2 || (dc && counter < dc + 1 && cn.length < 3)) {
       counter++;
       if (turn < playersNum) {
         openedCards = openCards(openedCards, this);
         if (openedCards.length > 1) {
-          if (isEqual(openedCards)) {
+          if (isEqual(openedCards) && counterAr[this.id] < 2) {
             players[turn].score++;
             score.innerText = `Score: ${players[turn].score}`;
           } else {
-            if (turn == playersNum) {
-              turn = 0;
+            newCounterArr = [...counterAr];
+            if (dcn.length < 2 && newCounterArr[this.id] < 2) {
+              turn++;
+              if (turn == playersNum) {
+                turn = 0;
+              }
+              timeout = setTimeout(changePlayer, 2500, players[turn]);
             }
-            timeout = setTimeout(changePlayer, 2500, players[turn]);
-          }
-          counter = 0;
-          openedCards = [];
-          for (i2 in counterAr) {
-            counterAr[i2] = 0;
           }
         }
       }
